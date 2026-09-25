@@ -1,1 +1,1539 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DOGIVOIRE — Chiens à vendre en Côte d'Ivoire</title>
+
+  <meta name="description"
+        content="DOGIVOIRE — Découvrez des chiens à vendre en Côte d'Ivoire. Chiots, chiens de race et annonces de particuliers.">
+
+  <style>
+    /* ==============================
+       VARIABLES
+    ============================== */
+
+    :root {
+      --primary: #111827;
+      --secondary: #f59e0b;
+      --light: #f8fafc;
+      --white: #ffffff;
+      --text: #1f2937;
+      --gray: #6b7280;
+      --green: #16a34a;
+      --border: #e5e7eb;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    /* ==============================
+       HEADER
+    ============================== */
+
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+
+    .sell-btn {
+      background: var(--secondary);
+      color: white !important;
+      padding: 10px 16px;
+      border-radius: 8px;
+    }
+
+    /* ==============================
+       HERO
+    ============================== */
+
+    .hero {
+      background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url("https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1600&q=80");
+
+      background-size: cover;
+      background-position: center;
+
+      min-height: 480px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+      color: white;
+
+      padding: 40px 20px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 7vw, 70px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+      font-weight: 900;
+    }
+
+    .hero h1 span {
+      color: var(--secondary);
+    }
+
+    .hero p {
+      font-size: 19px;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 13px 22px;
+      border-radius: 8px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .btn-light {
+      background: white;
+      color: var(--primary);
+    }
+
+    /* ==============================
+       SEARCH
+    ============================== */
+
+    .search-section {
+      max-width: 1100px;
+      margin: -40px auto 60px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .search-box {
+      background: white;
+      padding: 22px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 12px;
+    }
+
+    .search-box input,
+    .search-box select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      background: white;
+    }
+
+    .search-box input:focus,
+    .search-box select:focus {
+      border-color: var(--secondary);
+    }
+
+    /* ==============================
+       GENERAL
+    ============================== */
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      margin-bottom: 25px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      color: var(--primary);
+    }
+
+    .section-title p {
+      color: var(--gray);
+    }
+
+    /* ==============================
+       DOG CARDS
+    ============================== */
+
+    .dogs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .dog-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease;
+    }
+
+    .dog-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .dog-image {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .dog-content {
+      padding: 18px;
+    }
+
+    .dog-content h3 {
+      font-size: 21px;
+      margin-bottom: 5px;
+    }
+
+    .dog-info {
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-size: 21px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .dog-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .contact-btn {
+      flex: 1;
+      background: var(--green);
+      color: white;
+      padding: 11px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .details-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 11px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* ==============================
+       FEATURES
+    ============================== */
+
+    .features {
+      margin: 90px 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .feature {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .feature h3 {
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    /* ==============================
+       CTA
+    ============================== */
+
+    .cta {
+      margin: 70px 0;
+      background: var(--primary);
+      color: white;
+      border-radius: 18px;
+      padding: 55px 25px;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 35px;
+      margin-bottom: 10px;
+    }
+
+    .cta p {
+      color: #d1d5db;
+      margin-bottom: 25px;
+    }
+
+    /* ==============================
+       FOOTER
+    ============================== */
+
+    footer {
+      background: #0b1120;
+      color: white;
+      padding: 45px 20px 20px;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-logo {
+      font-size: 25px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    footer h4 {
+      margin-bottom: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: #d1d5db;
+      font-size: 14px;
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 35px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid #1f2937;
+      text-align: center;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    /* ==============================
+       MODAL
+    ============================== */
+
+    .modal {
+      display: none;
+
+      position: fixed;
+      inset: 0;
+
+      background: rgba(0,0,0,0.7);
+
+      z-index: 2000;
+
+      padding: 20px;
+
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .modal-body {
+      padding: 25px;
+    }
+
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 12px;
+
+      width: 38px;
+      height: 38px;
+
+      border: none;
+      border-radius: 50%;
+
+      background: white;
+
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    /* ==============================
+       NO RESULTS
+    ============================== */
+
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      color: var(--gray);
+      grid-column: 1 / -1;
+    }
+
+    /* ==============================
+       RESPONSIVE
+    ============================== */
+
+    @media (max-width: 900px) {
+
+      .dogs-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .navbar {
+        padding: 14px 15px;
+      }
+
+      .hero {
+        min-height: 520px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .search-section {
+        margin-top: -30px;
+      }
+
+      .search-box {
+        grid-template-columns: 1fr;
+      }
+
+      .dogs-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta h2 {
+        font-size: 27px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==============================
+       HEADER
+  ============================== -->
+
+  <header>
+
+    <nav class="navbar">
+
+      <a href="#" class="logo">
+        DOGI<span>VOIRE</span>
+      </a>
+
+      <div class="nav-links">
+
+        <a href="#annonces">Chiens</a>
+
+        <a href="#comment-ca-marche">
+          Comment ça marche
+        </a>
+
+        <a href="#contact">
+          Contact
+        </a>
+
+        <a href="#publier" class="sell-btn">
+          + Publier une annonce
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <!-- ==============================
+       HERO
+  ============================== -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>
+        Trouvez votre<br>
+        <span>compagnon idéal.</span>
+      </h1>
+
+      <p>
+        La plateforme ivoirienne pour acheter,
+        vendre et découvrir des chiens.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#annonces" class="btn btn-primary">
+          🐕 Voir les chiens
+        </a>
+
+        <a href="#publier" class="btn btn-light">
+          Publier une annonce
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==============================
+       SEARCH
+  ============================== -->
+
+  <section class="search-section">
+
+    <div class="search-box">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Rechercher une race..."
+      >
+
+      <select id="locationFilter">
+
+        <option value="">
+          Toutes les villes
+        </option>
+
+        <option value="Abidjan">
+          Abidjan
+        </option>
+
+        <option value="Yamoussoukro">
+          Yamoussoukro
+        </option>
+
+        <option value="Bouaké">
+          Bouaké
+        </option>
+
+        <option value="Grand-Bassam">
+          Grand-Bassam
+        </option>
+
+      </select>
+
+      <select id="priceFilter">
+
+        <option value="">
+          Tous les prix
+        </option>
+
+        <option value="300000">
+          Moins de 300 000 FCFA
+        </option>
+
+        <option value="500000">
+          Moins de 500 000 FCFA
+        </option>
+
+        <option value="1000000">
+          Moins de 1 000 000 FCFA
+        </option>
+
+      </select>
+
+      <button
+        class="btn btn-primary"
+        onclick="filterDogs()"
+      >
+        Rechercher
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==============================
+       ANNONCES
+  ============================== -->
+
+  <main>
+
+    <section id="annonces" class="container">
+
+      <div class="section-title">
+
+        <h2>
+          Chiens disponibles
+        </h2>
+
+        <p>
+          Découvrez nos dernières annonces.
+        </p>
+
+      </div>
+
+
+      <div class="dogs-grid" id="dogsGrid">
+
+
+        <!-- CHIEN 1 -->
+
+        <article
+          class="dog-card"
+          data-name="berger allemand"
+          data-location="Abidjan"
+          data-price="450000"
+        >
+
+          <img
+            class="dog-image"
+            src="https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?auto=format&fit=crop&w=800&q=80"
+            alt="Berger allemand"
+          >
+
+          <div class="dog-content">
+
+            <h3>
+              Berger Allemand
+            </h3>
+
+            <p class="dog-info">
+              🐕 8 mois • ♂ Mâle<br>
+              📍 Abidjan
+            </p>
+
+            <div class="price">
+              450 000 FCFA
+            </div>
+
+            <div class="dog-actions">
+
+              <a
+                class="contact-btn"
+                href="https://wa.me/2250545437525?text=Bonjour%20DOGIVOIRE,%20je%20suis%20intéressé%20par%20le%20Berger%20Allemand."
+                target="_blank"
+              >
+                WhatsApp
+              </a>
+
+              <button
+                class="details-btn"
+                onclick="showDog(
+                  'Berger Allemand',
+                  '8 mois',
+                  'Mâle',
+                  'Abidjan',
+                  '450 000 FCFA',
+                  'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?auto=format&fit=crop&w=800&q=80'
+                )"
+              >
+                Détails
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- CHIEN 2 -->
+
+        <article
+          class="dog-card"
+          data-name="golden retriever"
+          data-location="Grand-Bassam"
+          data-price="600000"
+        >
+
+          <img
+            class="dog-image"
+            src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=800&q=80"
+            alt="Golden Retriever"
+          >
+
+          <div class="dog-content">
+
+            <h3>
+              Golden Retriever
+            </h3>
+
+            <p class="dog-info">
+              🐕 6 mois • ♀ Femelle<br>
+              📍 Grand-Bassam
+            </p>
+
+            <div class="price">
+              600 000 FCFA
+            </div>
+
+            <div class="dog-actions">
+
+              <a
+                class="contact-btn"
+                href="https://wa.me/2250545437525?text=Bonjour,%20je%20suis%20intéressé%20par%20le%20Golden%20Retriever."
+                target="_blank"
+              >
+                WhatsApp
+              </a>
+
+              <button
+                class="details-btn"
+                onclick="showDog(
+                  'Golden Retriever',
+                  '6 mois',
+                  'Femelle',
+                  'Grand-Bassam',
+                  '600 000 FCFA',
+                  'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=800&q=80'
+                )"
+              >
+                Détails
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- CHIEN 3 -->
+
+        <article
+          class="dog-card"
+          data-name="rottweiler"
+          data-location="Abidjan"
+          data-price="550000"
+        >
+
+          <img
+            class="dog-image"
+            src="https://images.unsplash.com/photo-1567752881298-894bb81f9379?auto=format&fit=crop&w=800&q=80"
+            alt="Rottweiler"
+          >
+
+          <div class="dog-content">
+
+            <h3>
+              Rottweiler
+            </h3>
+
+            <p class="dog-info">
+              🐕 10 mois • ♂ Mâle<br>
+              📍 Abidjan
+            </p>
+
+            <div class="price">
+              550 000 FCFA
+            </div>
+
+            <div class="dog-actions">
+
+              <a
+                class="contact-btn"
+                href="https://wa.me/2250545437525?text=Bonjour,%20je%20suis%20intéressé%20par%20le%20Rottweiler."
+                target="_blank"
+              >
+                WhatsApp
+              </a>
+
+              <button
+                class="details-btn"
+                onclick="showDog(
+                  'Rottweiler',
+                  '10 mois',
+                  'Mâle',
+                  'Abidjan',
+                  '550 000 FCFA',
+                  'https://images.unsplash.com/photo-1567752881298-894bb81f9379?auto=format&fit=crop&w=800&q=80'
+                )"
+              >
+                Détails
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- CHIEN 4 -->
+
+        <article
+          class="dog-card"
+          data-name="labrador"
+          data-location="Yamoussoukro"
+          data-price="350000"
+        >
+
+          <img
+            class="dog-image"
+            src="https://images.unsplash.com/photo-1591769225440-811ad7d6eab2?auto=format&fit=crop&w=800&q=80"
+            alt="Labrador"
+          >
+
+          <div class="dog-content">
+
+            <h3>
+              Labrador
+            </h3>
+
+            <p class="dog-info">
+              🐕 7 mois • ♂ Mâle<br>
+              📍 Yamoussoukro
+            </p>
+
+            <div class="price">
+              350 000 FCFA
+            </div>
+
+            <div class="dog-actions">
+
+              <a
+                class="contact-btn"
+                href="https://wa.me/2250545437525?text=Bonjour,%20je%20suis%20intéressé%20par%20le%20Labrador."
+                target="_blank"
+              >
+                WhatsApp
+              </a>
+
+              <button
+                class="details-btn"
+                onclick="showDog(
+                  'Labrador',
+                  '7 mois',
+                  'Mâle',
+                  'Yamoussoukro',
+                  '350 000 FCFA',
+                  'https://images.unsplash.com/photo-1591769225440-811ad7d6eab2?auto=format&fit=crop&w=800&q=80'
+                )"
+              >
+                Détails
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- CHIEN 5 -->
+
+        <article
+          class="dog-card"
+          data-name="husky"
+          data-location="Abidjan"
+          data-price="700000"
+        >
+
+          <img
+            class="dog-image"
+            src="https://images.unsplash.com/photo-1605568427561-40dd23c2acea?auto=format&fit=crop&w=800&q=80"
+            alt="Husky"
+          >
+
+          <div class="dog-content">
+
+            <h3>
+              Husky Sibérien
+            </h3>
+
+            <p class="dog-info">
+              🐕 9 mois • ♂ Mâle<br>
+              📍 Abidjan
+            </p>
+
+            <div class="price">
+              700 000 FCFA
+            </div>
+
+            <div class="dog-actions">
+
+              <a
+                class="contact-btn"
+                href="https://wa.me/2250545437525?text=Bonjour,%20je%20suis%20intéressé%20par%20le%20Husky."
+                target="_blank"
+              >
+                WhatsApp
+              </a>
+
+              <button
+                class="details-btn"
+                onclick="showDog(
+                  'Husky Sibérien',
+                  '9 mois',
+                  'Mâle',
+                  'Abidjan',
+                  '700 000 FCFA',
+                  'https://images.unsplash.com/photo-1605568427561-40dd23c2acea?auto=format&fit=crop&w=800&q=80'
+                )"
+              >
+                Détails
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- CHIEN 6 -->
+
+        <article
+          class="dog-card"
+          data-name="bouledogue français"
+          data-location="Bouaké"
+          data-price="800000"
+        >
+
+          <img
+            class="dog-image"
+            src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80"
+            alt="Bouledogue français"
+          >
+
+          <div class="dog-content">
+
+            <h3>
+              Bouledogue Français
+            </h3>
+
+            <p class="dog-info">
+              🐕 5 mois • ♀ Femelle<br>
+              📍 Bouaké
+            </p>
+
+            <div class="price">
+              800 000 FCFA
+            </div>
+
+            <div class="dog-actions">
+
+              <a
+                class="contact-btn"
+                href="https://wa.me/2250545437525?text=Bonjour,%20je%20suis%20intéressé%20par%20le%20Bouledogue%20Français."
+                target="_blank"
+              >
+                WhatsApp
+              </a>
+
+              <button
+                class="details-btn"
+                onclick="showDog(
+                  'Bouledogue Français',
+                  '5 mois',
+                  'Femelle',
+                  'Bouaké',
+                  '800 000 FCFA',
+                  'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80'
+                )"
+              >
+                Détails
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <div class="no-results" id="noResults">
+          😕 Aucun chien ne correspond à votre recherche.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==============================
+         COMMENT ÇA MARCHE
+    ============================== -->
+
+    <section
+      id="comment-ca-marche"
+      class="features container"
+    >
+
+      <div class="section-title">
+
+        <h2>
+          Comment ça marche ?
+        </h2>
+
+        <p>
+          Acheter ou vendre un chien devient simple.
+        </p>
+
+      </div>
+
+
+      <div class="features-grid">
+
+        <div class="feature">
+
+          <div class="feature-icon">
+            🔎
+          </div>
+
+          <h3>
+            1. Recherchez
+          </h3>
+
+          <p>
+            Trouvez le chien qui correspond
+            à vos besoins grâce aux filtres.
+          </p>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">
+            💬
+          </div>
+
+          <h3>
+            2. Contactez
+          </h3>
+
+          <p>
+            Contactez directement le vendeur
+            par WhatsApp.
+          </p>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">
+            🤝
+          </div>
+
+          <h3>
+            3. Rencontrez
+          </h3>
+
+          <p>
+            Organisez la rencontre et finalisez
+            la transaction directement avec le vendeur.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==============================
+         CTA
+    ============================== -->
+
+    <section
+      id="publier"
+      class="cta container"
+    >
+
+      <h2>
+        Vous avez un chien à vendre ?
+      </h2>
+
+      <p>
+        Publiez votre annonce et trouvez
+        rapidement des acheteurs.
+      </p>
+
+      <a
+        href="https://wa.me/2250545437525?text=Bonjour%20DOGIVOIRE,%20je%20souhaite%20publier%20une%20annonce."
+        target="_blank"
+        class="btn btn-primary"
+      >
+        + Publier mon annonce
+      </a>
+
+    </section>
+
+  </main>
+
+
+  <!-- ==============================
+       FOOTER
+  ============================== -->
+
+  <footer id="contact">
+
+    <div class="footer-grid">
+
+      <div>
+
+        <div class="footer-logo">
+          DOGI<span>VOIRE</span>
+        </div>
+
+        <p>
+          La plateforme ivoirienne dédiée
+          aux annonces de chiens.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Navigation
+        </h4>
+
+        <div class="footer-links">
+
+          <a href="#annonces">
+            Chiens
+          </a>
+
+          <a href="#comment-ca-marche">
+            Comment ça marche
+          </a>
+
+          <a href="#publier">
+            Publier une annonce
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Contact
+        </h4>
+
+        <div class="footer-links">
+
+          <a href="https://wa.me/2250545437525">
+            WhatsApp
+          </a>
+
+          <a href="mailto:contact@dogivoire.com">
+            Email
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+      © 2026 DOGIVOIRE — Tous droits réservés.
+
+    </div>
+
+  </footer>
+
+
+  <!-- ==============================
+       MODAL
+  ============================== -->
+
+  <div
+    class="modal"
+    id="dogModal"
+    onclick="closeModal(event)"
+  >
+
+    <div
+      class="modal-content"
+      onclick="event.stopPropagation()"
+    >
+
+      <button
+        class="close"
+        onclick="closeDogModal()"
+      >
+        ×
+      </button>
+
+      <img
+        id="modalImage"
+        class="modal-image"
+        src=""
+        alt=""
+      >
+
+      <div class="modal-body">
+
+        <h2 id="modalName">
+        </h2>
+
+        <p id="modalInfo">
+        </p>
+
+        <br>
+
+        <a
+          id="modalWhatsapp"
+          href="#"
+          target="_blank"
+          class="contact-btn"
+          style="display:block;text-align:center;"
+        >
+          💬 Contacter sur WhatsApp
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==============================
+       JAVASCRIPT
+  ============================== -->
+
+  <script>
+
+    /* ==============================
+       RECHERCHE
+    ============================== */
+
+    function filterDogs() {
+
+      const search =
+        document
+          .getElementById("searchInput")
+          .value
+          .toLowerCase();
+
+      const location =
+        document
+          .getElementById("locationFilter")
+          .value;
+
+      const price =
+        document
+          .getElementById("priceFilter")
+          .value;
+
+      const cards =
+        document.querySelectorAll(".dog-card");
+
+      let visible = 0;
+
+      cards.forEach(card => {
+
+        const name =
+          card.dataset.name.toLowerCase();
+
+        const cardLocation =
+          card.dataset.location;
+
+        const cardPrice =
+          Number(card.dataset.price);
+
+        const matchesName =
+          name.includes(search);
+
+        const matchesLocation =
+          !location ||
+          cardLocation === location;
+
+        const matchesPrice =
+          !price ||
+          cardPrice <= Number(price);
+
+        if (
+          matchesName &&
+          matchesLocation &&
+          matchesPrice
+        ) {
+
+          card.style.display = "";
+
+          visible++;
+
+        } else {
+
+          card.style.display = "none";
+
+        }
+
+      });
+
+      document
+        .getElementById("noResults")
+        .style.display =
+          visible === 0 ? "block" : "none";
+
+    }
+
+
+    /* ==============================
+       MODAL
+    ============================== */
+
+    function showDog(
+      name,
+      age,
+      gender,
+      location,
+      price,
+      image
+    ) {
+
+      document
+        .getElementById("modalName")
+        .textContent = name;
+
+      document
+        .getElementById("modalInfo")
+        .innerHTML =
+          "🐕 " + age +
+          "<br>👤 " + gender +
+          "<br>📍 " + location +
+          "<br>💰 <strong>" + price + "</strong>";
+
+      document
+        .getElementById("modalImage")
+        .src = image;
+
+      const message =
+        "Bonjour DOGIVOIRE, je suis intéressé par le " +
+        name +
+        " à " +
+        price +
+        ".";
+
+      document
+        .getElementById("modalWhatsapp")
+        .href =
+          "https://wa.me/2250545437525?text=" +
+          encodeURIComponent(message);
+
+      document
+        .getElementById("dogModal")
+        .classList
+        .add("active");
+
+    }
+
+
+    function closeDogModal() {
+
+      document
+        .getElementById("dogModal")
+        .classList
+        .remove("active");
+
+    }
+
+
+    function closeModal(event) {
+
+      if (
+        event.target.id === "dogModal"
+      ) {
+
+        closeDogModal();
+
+      }
+
+    }
+
+
+    /* ==============================
+       RECHERCHE EN TEMPS RÉEL
+    ============================== */
+
+    document
+      .getElementById("searchInput")
+      .addEventListener(
+        "input",
+        filterDogs
+      );
+
+    document
+      .getElementById("locationFilter")
+      .addEventListener(
+        "change",
+        filterDogs
+      );
+
+    document
+      .getElementById("priceFilter")
+      .addEventListener(
+        "change",
+        filterDogs
+      );
+
+  </script>
+
+</body>
+</html>
